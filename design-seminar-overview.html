@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIとデザインツールで実現する新しいデザインワークフロー - セミナー概要</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: 'base',
+                securityLevel: 'loose',
+                fontFamily: 'sans-serif',
+                themeVariables: {
+                    primaryColor: '#4CAF50',
+                    primaryTextColor: '#fff',
+                    primaryBorderColor: '#9575CD',
+                    lineColor: '#009688',
+                    secondaryColor: '#FFC107',
+                    tertiaryColor: '#f0f0f0'
+                },
+                flowchart: {
+                    curve: 'basis'
+                }
+            });
+        });
+    </script>
+    <style>
+        :root {
+            --main-color: #4CAF50;
+            --accent-color-1: #9575CD;
+            --accent-color-2: #FFC107;
+            --accent-color-3: #009688;
+            --accent-color-4: #E91E63;
+            --background-color: #FAFAFA;
+            --text-color: #333;
+            --light-text-color: #FFF;
+            --border-color: #E0E0E0;
+        }
+        
+        body {
+            font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 0;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            color: var(--main-color);
+            margin-bottom: 0.8em;
+        }
+        
+        h1 {
+            font-size: 2.2em;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-color-2);
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 1.8em;
+            color: var(--accent-color-3);
+            border-left: 5px solid var(--accent-color-3);
+            padding-left: 15px;
+            margin-top: 2em;
+        }
+        
+        h3 {
+            font-size: 1.4em;
+            color: var(--accent-color-1);
+            margin-top: 1.5em;
+        }
+        
+        strong {
+            color: var(--accent-color-4);
+            font-weight: bold;
+        }
+        
+        ul, ol {
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 0.8em;
+        }
+        
+        p {
+            margin-bottom: 1.2em;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--main-color) 0%, var(--accent-color-3) 100%);
+            color: var(--light-text-color);
+            padding: 50px 30px;
+            text-align: center;
+        }
+        
+        .hero-section h1 {
+            color: var(--light-text-color);
+            border-bottom: none;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        
+        .hero-section p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+        
+        .content-wrapper {
+            padding: 30px;
+        }
+        
+        .benefits-section ul li::before {
+            content: '✅ ';
+            color: var(--main-color);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        
+        .benefits-section ul {
+            list-style: none;
+        }
+        
+        .process-section ol {
+            list-style: none;
+            counter-reset: step-counter;
+            padding-left: 0;
+        }
+        
+        .process-section li {
+            counter-increment: step-counter;
+            margin-bottom: 1.5em;
+            position: relative;
+            padding-left: 50px;
+        }
+        
+        .process-section li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 35px;
+            height: 35px;
+            background-color: var(--accent-color-2);
+            color: var(--text-color);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .quote {
+            background-color: #f5f5f5;
+            border-left: 5px solid var(--accent-color-1);
+            padding: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .quote p {
+            margin-bottom: 0.5em;
+        }
+        
+        .faq-section dt {
+            font-weight: bold;
+            color: var(--accent-color-3);
+            margin-top: 1.5em;
+            font-size: 1.1em;
+        }
+        
+        .faq-section dd {
+            margin-left: 1.5em;
+            margin-bottom: 1.5em;
+            line-height: 1.8;
+        }
+        
+        .mermaid {
+            margin: 30px 0;
+            text-align: center;
+            background-color: #fafafa;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .highlight-box {
+            background-color: #fff3e0;
+            border: 2px solid var(--accent-color-2);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .highlight-box h4 {
+            color: var(--accent-color-4);
+            margin-top: 0;
+        }
+        
+        .tool-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .tool-card {
+            background-color: #f9f9f9;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+        }
+        
+        .tool-card h4 {
+            color: var(--accent-color-3);
+            margin-top: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .tool-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-section h1 {
+                font-size: 1.8em;
+            }
+            
+            .hero-section > div {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .process-section li {
+                padding-left: 45px;
+            }
+            
+            .content-wrapper {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="hero-section">
+            <h1>💡 AIとデザインツールで実現する<br>新しいデザインワークフロー</h1>
+            <p>デザイン未経験者でも、プロ級のクオリティを実現できる時代が到来</p>
+            <p><strong style="color: var(--light-text-color); font-size: 1.3em;">「問題発見力」を持つデザイナーへの第一歩</strong></p>
+            <div style="margin-top: 30px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 700px; margin-left: auto; margin-right: auto;">
+                <div style="background-color: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px;">
+                    <div style="font-size: 2em; font-weight: bold;">150+</div>
+                    <div style="font-size: 0.9em;">参加者</div>
+                </div>
+                <div style="background-color: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px;">
+                    <div style="font-size: 2em; font-weight: bold;">95%</div>
+                    <div style="font-size: 0.9em;">高評価</div>
+                </div>
+                <div style="background-color: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px;">
+                    <div style="font-size: 2em; font-weight: bold;">即実践</div>
+                    <div style="font-size: 0.9em;">可能な内容</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="benefits-section">
+                <h2>🎯 この内容から得られること</h2>
+                
+                <h3>主な学習内容 / トピック</h3>
+                <ul>
+                    <li><strong>MiriCanvasの実践的な使い方</strong> - AI生成画像の文字修正、編集、デザイン調整の具体的な手法</li>
+                    <li><strong>AIプロンプトエンジニアリング</strong> - 高品質なデザインを生成するための効果的なプロンプト設計</li>
+                    <li><strong>デザインの本質理解</strong> - 「意味をつくる」というデザインの根本的な考え方</li>
+                    <li><strong>背景と素材の分離テクニック</strong> - パーツごとに生成して合成する高度な手法</li>
+                    <li><strong>ツールの組み合わせ活用</strong> - MiriCanvas × AI画像生成ツールの連携ワークフロー</li>
+                </ul>
+
+                <h3>💡 具体的にできるようになること / 成果</h3>
+                <ul>
+                    <li>AI生成画像の<strong style="color: var(--accent-color-4);">文字化けや不自然な部分を簡単に修正</strong>できるようになる</li>
+                    <li><strong>プロンプト一つで魅力的な広告バナーやLPデザイン</strong>を量産できる</li>
+                    <li>デザインツールに対する<strong>心理的ハードルが下がり、実践できる</strong>ようになる</li>
+                    <li><strong>「問題解決力」から「問題発見力」へ</strong> - デザイナーとして本質的な価値を提供できるマインドセットの獲得</li>
+                    <li>MiriCanvasとCanvaの違いを理解し、<strong>用途に応じた最適なツール選択</strong>ができる</li>
+                    <li>AIツール（ChatGPT、Midjourney、SORA等）を<strong>デザインワークフローに統合</strong>できる</li>
+                </ul>
+
+                <div class="highlight-box" style="margin-top: 30px;">
+                    <h4>📊 参加者の多様性</h4>
+                    <p>
+                        このセミナーは<strong>20代から60代以上まで幅広い年齢層</strong>が参加。
+                        職業も会社員、個人事業主、パート・アルバイト、経営者、主婦など多岐にわたり、
+                        <strong style="color: var(--accent-color-4);">デザイン経験の有無を問わず誰でも学べる内容</strong>です。
+                    </p>
+                    <ul style="list-style: none; padding-left: 0; margin-top: 15px;">
+                        <li>✅ <strong>デザイン初心者</strong>: 「とっかかりがわからなかった」方が実践的な第一歩を踏み出せた</li>
+                        <li>✅ <strong>現役デザイナー</strong>: 「デザインの仕事をしている私からしても有意義」と評価</li>
+                        <li>✅ <strong>Canvaユーザー</strong>: 「ストレスなく移行できた」とツール移行も容易</li>
+                        <li>✅ <strong>AI活用者</strong>: 「画像生成についても検討したい」と新たな可能性を発見</li>
+                    </ul>
+                </div>
+
+                <h3 style="color: var(--accent-color-1); margin-top: 30px;">📈 セミナーで得られる学びの広がり</h3>
+                
+                <pre class="mermaid">
+graph TD
+    A[セミナー参加] --> B[ツールスキル]
+    A --> C[デザイン思考]
+    A --> D[実践力]
+    
+    B --> B1[MiriCanvas操作]
+    B --> B2[AIプロンプト]
+    B --> B3[画像編集]
+    
+    C --> C1[問題発見力]
+    C --> C2[意味をつくる]
+    C --> C3[デザイン観点]
+    
+    D --> D1[即実践可能]
+    D --> D2[継続改善]
+    D --> D3[キャリア拡大]
+    
+    B1 --> E[総合的なデザイン力]
+    B2 --> E
+    B3 --> E
+    C1 --> E
+    C2 --> E
+    C3 --> E
+    D1 --> E
+    D2 --> E
+    D3 --> E
+    
+    E --> F[プロフェッショナルな成果物]
+    
+    style A fill:#4CAF50,color:#fff
+    style E fill:#E91E63,color:#fff
+    style F fill:#FFC107
+</pre>
+
+                <h3>✨ 期待される変化 / ポジティブな影響</h3>
+                <p>
+                    このセミナーを通じて、参加者は<strong>「デザインが楽しい」</strong>と感じ、<strong>すぐに試したくなる</strong>という体験を得ています。
+                    デザインに苦手意識を持っていた方々が、<strong style="color: var(--accent-color-4);">「やってみようと思えた」</strong>という
+                    前向きな変化を遂げています。実際に、セミナー中に提供されたプロンプトを使って、その場で実践し、
+                    <strong>期待以上の生成結果</strong>を得られたという声が多数寄せられています。
+                </p>
+                <p>
+                    特に印象的なのは、<strong style="color: var(--accent-color-4);">「観点や思想が大事」</strong>という気づきを得られることです。
+                    単なるツールの使い方だけでなく、<strong>デザイン思考</strong>という本質的な視点を学べるため、
+                    業務効率化だけでなく、<strong>自身のスキルセットとキャリアの幅を広げる</strong>ことができます。
+                </p>
+
+                <h3 style="color: var(--accent-color-1); margin-top: 30px;">🔄 参加者の変化（ビフォー → アフター）</h3>
+                
+                <div class="tool-comparison" style="margin-top: 20px;">
+                    <div class="tool-card" style="background-color: #ffebee;">
+                        <h4 style="color: #c62828; margin-top: 0;">😰 セミナー参加前</h4>
+                        <ul style="font-size: 0.95em; padding-left: 20px;">
+                            <li>「デザインのとっかかりがわからない」</li>
+                            <li>「デザインに苦手意識を持っている」</li>
+                            <li>「文字の修正や拡張がうまくいかない」</li>
+                            <li>「MiriCanvasを使いこなせていない」</li>
+                            <li>「いつか勉強しないといけないと思いつつ踏み出せない」</li>
+                        </ul>
+                    </div>
+                    <div class="tool-card" style="background-color: #e8f5e9;">
+                        <h4 style="color: #2e7d32; margin-top: 0;">😊 セミナー参加後</h4>
+                        <ul style="font-size: 0.95em; padding-left: 20px;">
+                            <li><strong>「やってみようと思えた！」</strong></li>
+                            <li><strong>「すぐに試したくなった！」</strong></li>
+                            <li><strong>「ミリキャンバス登録してみました」</strong></li>
+                            <li><strong>「使い倒そうと思いました」</strong></li>
+                            <li><strong>「いま始めなきゃ！と強く感じた」</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="quote" style="margin-top: 25px; background-color: #fff8e1; border-left-color: var(--accent-color-2);">
+                    <h4 style="color: var(--accent-color-4); margin-top: 0;">💬 典型的な変化の声</h4>
+                    <p><strong>【デザイン初心者 40代会社員】</strong><br>
+                    「デザインに苦手意識を持っていましたが、<strong style="color: var(--accent-color-4);">やってみようって思いました</strong>！
+                    あと意味を作ること、問題発見力についてめちゃくちゃ大事なことだなって思いました！」</p>
+                    
+                    <p><strong>【Canvaユーザー 40代個人事業主】</strong><br>
+                    「MiriCanvasを先日から使い始めたので、使い方を教えて頂き、さらにできることが増えました。
+                    <strong>Canva使ってきたので、ストレスなく移行できました</strong>。
+                    そして、最後のプロンプト<strong style="color: var(--accent-color-4);">感動しました</strong>！」</p>
+                    
+                    <p><strong>【ツール探し中 40代個人事業主】</strong><br>
+                    「ちょうど文字を修正や拡張する時にうまくいかなかったのですが、
+                    <strong>miricanvasはうまくいくのですね</strong>。早速使ってみようとおもいます。
+                    <strong style="color: var(--accent-color-4);">貴重なテクニックをご教示いただきありがとうございました</strong>。」</p>
+                    
+                    <p><strong>【AIに興味 40代個人事業主】</strong><br>
+                    「<strong>AIでここまで生成できるってすごいな</strong>と思いました！
+                    <strong style="color: var(--accent-color-4);">仕事につなげられそうでうれしいです</strong>。いろいろ試してみます。」</p>
+                </div>
+
+                <pre class="mermaid">
+graph LR
+    A[😰 デザインへの<br/>苦手意識] --> B[📚 セミナー参加]
+    B --> C[💡 問題発見力<br/>という視点獲得]
+    B --> D[🔧 MiriCanvas<br/>実践テクニック習得]
+    B --> E[📝 即使える<br/>プロンプト入手]
+    C --> F[😊 やってみよう！<br/>という意欲]
+    D --> F
+    E --> F
+    F --> G[🚀 実践開始]
+    G --> H[📈 継続的な<br/>スキル向上]
+    
+    style A fill:#ffebee
+    style F fill:#e8f5e9
+    style G fill:#fff3e0
+    style H fill:#e1f5fe
+</pre>
+            </section>
+
+            <section class="proof-section">
+                <h2>💬 参加者の具体的な感想と学び</h2>
+                
+                <div class="highlight-box">
+                    <h4>🎓 講師KAWAIさんの教え方の魅力</h4>
+                    <p>
+                        <strong>落ち着いたトーンで非常にわかりやすい説明</strong>が特徴。初心者にも理解しやすく、
+                        実際の画面操作を見せながら丁寧に解説。スライドデザインも参考になると評判。
+                    </p>
+                </div>
+
+                <h3>🎯 デザイン思考への気づき</h3>
+                
+                <div class="quote">
+                    <p>"ツールやデザイン自体もそうですが、やはり<strong>観点や思想が大事</strong>だなと感じました。ありがとうございました。"</p>
+                    <p><em>- 40代 会社員</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"<strong>問題解決力より問題発見力</strong>は考えたことがなかったが、言われてみればそのとおりで、
+                    そのくらいの転機にどう対応するのか、に思いを至らせることができる貴重な時間でした。ありがとうございました！"</p>
+                    <p><em>- 40代 会社員</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"デザインに苦手意識を持っていましたが、<strong>やってみようって思いました</strong>！
+                    あと<strong style="color: var(--accent-color-4);">意味を作ること、問題発見力についてめちゃくちゃ大事なことだなって思いました</strong>！"</p>
+                    <p><em>- 30代 会社員</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"デザイナーが持つべき視点は<strong>「問題発見力」</strong>という部分に学びを感じました。
+                    <strong>問題解決が重視されてると考えていた</strong>ので、発見することは確かにデザイナー視点で気づくことが多いだろうし、
+                    重宝される人材だなと。他にも様々大変有意義な内容でした。ありがとうございました！！"</p>
+                    <p><em>- 30代 個人事業主</em></p>
+                </div>
+
+                <h3>💡 MiriCanvasの実用性への驚き</h3>
+
+                <div class="quote">
+                    <p>"MiriCanvasを最近使用していないのですが、<strong>便利な機能があることを知り、また使いたくなりました</strong>。
+                    使いこなせていないみたいので、色々触ってみようと思います。"</p>
+                    <p><em>- 40代 会社員</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"<strong>AIで文字化けしたものをミリキャンバスできれいに修正する方法</strong>が見れてうれしいです。今後活用していきたいです。"</p>
+                    <p><em>- 50代 パート・アルバイト</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"ミリキャン、<strong>修正に使えるんですね</strong>。また使ってみようかな。
+                    <strong style="color: var(--accent-color-4);">パーツづくりにAI使うのも目からウロコ</strong>でした。"</p>
+                    <p><em>- 40代 会社員</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"ちょうど<strong>文字を修正や拡張する時にうまくいかなかった</strong>のですが、
+                    <strong>miricanvasはうまくいくのですね</strong>。私はCanvaをメインで使用しているので、
+                    早速使ってみようとおもいます。貴重なテクニックをご教示いただきありがとうございました。"</p>
+                    <p><em>- 40代 会社員</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"MiriCanvasを先日から使い始めたので、使い方を教えて頂き、さらにできることが増えました。
+                    <strong>Canva使ってきたので、ストレスなく移行できました</strong>。
+                    そして、<strong style="color: var(--accent-color-4);">最後のプロンプト感動しました</strong>！ありがとうございました。"</p>
+                    <p><em>- 40代 個人事業主</em></p>
+                </div>
+
+                <h3>🚀 即実践への意欲</h3>
+
+                <div class="quote">
+                    <p>"とても楽しいセミナーでした！<strong style="color: var(--accent-color-4);">すぐに試したくなりました</strong>！"</p>
+                    <p><em>- 40代 会社員</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"川合さんのウェビナー、楽しみにしてました！サクサク進むのにとても分かりやすくて、
+                    <strong>miricanvasを使い倒そうと思いました</strong>！"</p>
+                    <p><em>- 40代 個人事業主</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"<strong>AIでここまで生成できるってすごいなと思いました</strong>！
+                    <strong style="color: var(--accent-color-4);">仕事につなげられそうでうれしいです</strong>。いろいろ試してみます。"</p>
+                    <p><em>- 40代 個人事業主</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"<strong>プロンプトだけでここまでデザインできるとは正直思っていませんでした</strong>。
+                    それに、修正もMiriCanvasとの連携であそこまでスムーズにいくとは<strong>すぐに使ってみたくなりました</strong>。"</p>
+                    <p><em>- 40代 会社員</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"<strong>問題発見力！めっちゃ共感しました</strong>！！miricanvasも少しですが実際の操作見れて勉強になりました！
+                    AIでデザイン楽しくて、サイコー！本も買います"</p>
+                    <p><em>- 40代 会社員</em></p>
+                </div>
+
+                <h3>📚 プロンプトと実践的内容の評価</h3>
+
+                <div class="quote">
+                    <p>"河合さんのお話、めちゃくちゃ分かりやすかったです！
+                    <strong>いただいたプロンプトですぐに作ってみます</strong>🩷"</p>
+                    <p><em>- 50代 個人事業主</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"とても参考になりました！<strong>プロンプトを参考にしていろいろ試してみたいと思います</strong>！"</p>
+                    <p><em>- 40代 会社員</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"<strong>ご紹介いただいたプロンプトも期待以上の生成ができて楽しかったです</strong>！"</p>
+                    <p><em>- 50代 会社員</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"川合さんの出版記念セミナー<strong>3つコンプリートしました</strong>！！
+                    セミナーの内容が毎回違うので、毎回ワクワク楽しかったです！
+                    <strong style="color: var(--accent-color-4);">すぐアウトプットできるようにプロンプトもいただけて、すぐ実践できるのも魅力</strong>です。
+                    ありがとうございました✨"</p>
+                    <p><em>- 40代 パート・アルバイト</em></p>
+                </div>
+
+                <h3>🎨 デザイン初心者からの反応</h3>
+
+                <div class="quote">
+                    <p>"デザインのとっかかりがわからなかったのでとても参考になりました。ありがとうございました。"</p>
+                    <p><em>- 40代 会社員</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"デザインはあまり勉強してないので新鮮でした！ありがとうございます"</p>
+                    <p><em>- 40代 会社員</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"<strong>意外とデザインの観点からお話しされてた</strong>ので、
+                    デザインの仕事をしている私からしても有意義な内容でした。"</p>
+                    <p><em>- 50代 会社員（デザイン職）</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"デザインが果たす役割や重要性は認識しつつも、勉強したことがなく、
+                    いつか本格的に勉強して取り組まないといけないと思っていました。
+                    CanvaやMiriCanvas、NanoBANANAなどの登場によって<strong>ハードルが低くなった</strong>ところに、
+                    今日タイムリーにKAWAIさんの講義があって、<strong style="color: var(--accent-color-4);">いま始めなきゃ！と強く感じました</strong>。"</p>
+                    <p><em>- 40代 個人事業主</em></p>
+                </div>
+
+                <h3>🎤 講師の説明スキルへの賞賛</h3>
+
+                <div class="quote">
+                    <p>"お話しのされ方がとても聞きやすくて<strong>スッと頭に入ってきます</strong>。"</p>
+                    <p><em>- 50代 会社員</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"<strong>KAWAIさんの落ち着きのあるトークがめちゃいいですね。すべてが聞きやすい</strong>！"</p>
+                    <p><em>- 50代 会社員</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"川合さんのセミナーはいつもわかりやすくてありがたいです。<strong>今日も気付きをいただけました</strong>。"</p>
+                    <p><em>- 50代 個人事業主</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"川合さんのお話<strong>非常にわかりやすかったです</strong>。
+                    技術的な話とこれからのお話の<strong style="color: var(--accent-color-4);">バランスが絶妙で聞きやすかった</strong>です。"</p>
+                    <p><em>- 50代 会社員</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"河合さんのセミナーは、<strong>初心者にも本当にわかりやすく人柄の優しさを感じます</strong>。"</p>
+                    <p><em>- 60代以上 経営者</em></p>
+                </div>
+
+                <h3>📖 書籍との相乗効果</h3>
+
+                <div class="quote">
+                    <p>"<strong>書籍を手に聞くセミナー、とても参加している感がいつも以上にあって楽しかった</strong>です！"</p>
+                    <p><em>- 40代 パート・アルバイト</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"初MIRAICHIに参加させていただきとても楽しかったです！
+                    <strong>KAWAIさんの本を片手に、実際のMiriCanvasの使い方もさらに深く知れて</strong>あっという間の時間でした。"</p>
+                    <p><em>- その他 会社員</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"たまたま川合さんの本を知って、タイトルに惹かれて気になっていました。
+                    そんな時にウェビナーがあると知り即申し込みました。
+                    <strong>本にも記載されていることを紹介してくださったり、実際に作業しているところを見れたり、とても参考になりました</strong>！"</p>
+                    <p><em>- 30代 会社員</em></p>
+                </div>
+
+                <h3>🔧 技術的な学びの具体例</h3>
+
+                <div class="quote">
+                    <p>"<strong>背景と文字などを分けて作り後で合わせるようにすると良いこと</strong>覚えておきます。"</p>
+                    <p><em>- 60代以上 会社員</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"最後に話されていた、<strong>素材ごとに作成して合成させる方法を知りたい</strong>ので、
+                    書籍で勉強させていただきます。全体的にAIっぽさが残るデザインが多いので、
+                    生成した画像をテンプレート的に使って<strong style="color: var(--accent-color-4);">デザインをブラッシュアップできるようにしたい</strong>と思いました。"</p>
+                    <p><em>- 50代 会社員</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"やはり実際の動作を見せていただくのはわかりやすいですが、それ以上に
+                    <strong>課題解決力⇒課題発見力など、本質の話が聞けて大変参考になりました</strong>。
+                    書籍を参考にデザインする上での<strong>マイルールを作成してAIと共創していきたい</strong>と思います。"</p>
+                    <p><em>- 50代 会社員</em></p>
+                </div>
+
+                <h3>💫 総合的な満足度</h3>
+
+                <div class="quote">
+                    <p>"待ちに待ってたKAWAIさんのデザインセミナー、<strong>時間があっという間でした</strong>！
+                    <strong style="color: var(--accent-color-4);">もっと聞きたかったです！シリーズ化希望～</strong>"</p>
+                    <p><em>- 40代 会社員</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"本日もとても有益な情報、ありがとうございました！"</p>
+                    <p><em>- 40代 個人事業主</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"KAWAIさんのファンです！デザインの話はもちろん、
+                    <strong>ミリキャンバスの有効活用方法を知れて、とても勉強になりました</strong>。ありがとうございました！"</p>
+                    <p><em>- 40代 個人事業主</em></p>
+                </div>
+
+                <h3>🔧 実演された具体的なテクニック</h3>
+                <div class="tool-comparison">
+                    <div class="tool-card">
+                        <h4>MiriCanvasの強み</h4>
+                        <ul style="padding-left: 20px; font-size: 0.95em;">
+                            <li>AI生成画像の文字修正が簡単</li>
+                            <li>文字化け部分の削除・編集が直感的</li>
+                            <li>Canvaからストレスなく移行可能</li>
+                            <li>便利な機能が多数搭載</li>
+                        </ul>
+                    </div>
+                    <div class="tool-card">
+                        <h4>実践的な活用法</h4>
+                        <ul style="padding-left: 20px; font-size: 0.95em;">
+                            <li>背景と文字を分けて生成→合成</li>
+                            <li>パーツごとにAI生成して組み合わせ</li>
+                            <li>プロンプトを使った効率的な制作</li>
+                            <li>AIっぽさを減らすブラッシュアップ</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <pre class="mermaid">
+mindmap
+  root((AIデザインの<br/>可能性))
+    ツール活用
+      MiriCanvas
+        文字修正機能
+        直感的操作
+        Canva連携
+      AI画像生成
+        Midjourney
+        SORA
+        ChatGPT画像生成
+    スキル向上
+      プロンプト設計
+      デザイン思考
+      問題発見力
+      意味をつくる
+    実践成果
+      バナー量産
+      LP作成
+      サムネイル制作
+      プレゼン資料
+</pre>
+            </section>
+
+            <section class="process-section">
+                <h2>➡️ 詳細なプロセス / 手順</h2>
+                
+                <h3>AI × デザインツールの実践ワークフロー</h3>
+                <ol>
+                    <li>
+                        <strong>デザインの目的と問題を明確化する</strong><br>
+                        何を伝えたいのか、誰に届けたいのかを定義。<strong style="color: var(--accent-color-4);">「問題発見力」</strong>を発揮し、
+                        デザインで解決すべき本質的な課題を見つけ出す。単なる見た目の美しさではなく、
+                        <strong>「意味をつくる」</strong>という視点でアプローチ。
+                    </li>
+                    <li>
+                        <strong>効果的なプロンプトを設計する</strong><br>
+                        AI画像生成ツールに入力するプロンプトを作成。セミナーでは実践的なプロンプト例が提供され、
+                        <strong>すぐに使えるテンプレート</strong>として活用できる。背景、オブジェクト、テキストなど、
+                        要素ごとに分けて生成する戦略も学べる。
+                    </li>
+                    <li>
+                        <strong>AIで素材を生成する</strong><br>
+                        Midjourney、ChatGPT、SORAなどのAIツールを使って画像や動画素材を生成。
+                        この段階では完璧を求めず、<strong>ベースとなる素材を作成</strong>することに注力。
+                    </li>
+                    <li>
+                        <strong>MiriCanvasで編集・調整する</strong><br>
+                        生成された画像をMiriCanvasにインポート。AIで生成した画像の<strong style="color: var(--accent-color-4);">文字化けを修正</strong>、
+                        不要な要素を削除、配色やレイアウトを調整。実際の操作画面を見ながら学べるため、
+                        <strong>具体的なテクニック</strong>がすぐに身につく。
+                    </li>
+                    <li>
+                        <strong>パーツを合成して完成させる</strong><br>
+                        背景、テキスト、装飾要素などを個別に作成し、最終的に一つのデザインとして統合。
+                        この<strong>分離→合成アプローチ</strong>により、より柔軟で高品質な仕上がりを実現できる。
+                    </li>
+                    <li>
+                        <strong>実践とフィードバック</strong><br>
+                        作成したデザインを実際に使用してみて、効果を検証。セミナーで学んだ<strong>デザイン思考</strong>を活かし、
+                        継続的に改善していく。<strong>場数を踏む</strong>ことで、さらにスキルアップできる。
+                    </li>
+                </ol>
+
+                <h3 style="color: var(--accent-color-1); margin-top: 40px;">📝 セミナーで実際に学べる具体的な内容</h3>
+                
+                <div class="highlight-box">
+                    <h4>🎯 実演された主要テクニック</h4>
+                    <ul style="list-style: disc; padding-left: 25px; margin-top: 10px;">
+                        <li><strong>AI生成画像の文字化け部分の削除・修正方法</strong> - 最も評価された実践的スキル</li>
+                        <li><strong>背景とテキストを分けて作成→合成する手法</strong> - プロフェッショナルな仕上がりの秘訣</li>
+                        <li><strong>パーツごとにAI生成して組み合わせる</strong> - 柔軟性の高いデザイン制作</li>
+                        <li><strong>AIっぽさを減らすブラッシュアップ技術</strong> - 生成物をテンプレート的に活用</li>
+                        <li><strong>Canvaからのストレスフリーな移行方法</strong> - 既存スキルを活かせる</li>
+                        <li><strong>効果的なプロンプトの書き方と実例</strong> - すぐに使える具体例を多数提供</li>
+                    </ul>
+                </div>
+
+                <div class="quote" style="margin-top: 25px;">
+                    <h4 style="color: var(--accent-color-4); margin-top: 0;">🎨 参加者が実際に作れるようになったもの</h4>
+                    <p><strong>💼 ビジネス用途:</strong></p>
+                    <ul style="list-style: none; padding-left: 15px;">
+                        <li>✅ 広告バナーの量産</li>
+                        <li>✅ LP（ランディングページ）のデザイン</li>
+                        <li>✅ プレゼンテーション資料</li>
+                        <li>✅ SNS投稿用画像</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>🎬 クリエイティブ用途:</strong></p>
+                    <ul style="list-style: none; padding-left: 15px;">
+                        <li>✅ サムネイル作成</li>
+                        <li>✅ チラシ・ポスターデザイン</li>
+                        <li>✅ ブログやnoteのアイキャッチ画像</li>
+                        <li>✅ AIスライドコンテスト向け作品</li>
+                    </ul>
+                </div>
+
+                <div class="quote" style="background-color: #e3f2fd; border-left-color: var(--accent-color-3);">
+                    <p style="font-size: 1.05em;">
+                        <strong style="color: var(--accent-color-4);">「実際の画面で、丁寧に解説していただき、とても分かりやすかった」</strong>
+                        という声が多数。理論だけでなく、<strong>実際の操作を見ながら学べる</strong>ことで、
+                        帰宅後すぐに実践できる即戦力スキルが身につきます。
+                    </p>
+                </div>
+
+                <pre class="mermaid">
+graph TD
+    A[デザインニーズの発生] --> B{問題発見}
+    B --> C[目的・課題の明確化]
+    C --> D[プロンプト設計]
+    D --> E[AI画像生成]
+    E --> F[MiriCanvasで編集]
+    F --> G{品質チェック}
+    G -->|要修正| F
+    G -->|OK| H[パーツ合成]
+    H --> I[最終デザイン完成]
+    I --> J[実践・フィードバック]
+    J --> K[継続的改善]
+    
+    style C fill:#FFC107
+    style F fill:#4CAF50
+    style I fill:#E91E63
+</pre>
+
+                <div class="highlight-box">
+                    <h4>🎯 重要ポイント: 背景と文字を分けて作成する理由</h4>
+                    <p>
+                        AIで全てを一度に生成すると、文字が不自然だったり、細部の調整が難しくなります。
+                        <strong>要素ごとに分けて生成</strong>することで、<strong style="color: var(--accent-color-4);">
+                        後から自由に編集</strong>でき、プロフェッショナルな仕上がりを実現できます。
+                    </p>
+                    <p style="margin-top: 10px;">
+                        参加者からも<strong>「背景と文字などを分けて作り後で合わせるようにすると良いこと覚えておきます」</strong>
+                        という反響があり、この手法が特に印象に残ったとのことです。
+                    </p>
+                </div>
+            </section>
+
+            <section class="faq-section">
+                <h2>❓ 想定される疑問点 (Q&A)</h2>
+                
+                <dl>
+                    <dt>Q1: デザイン経験がまったくないのですが、本当にできるようになりますか?</dt>
+                    <dd>
+                        A1: はい、できます。セミナー参加者の多くが<strong>「デザインに苦手意識があった」</strong>と回答していますが、
+                        実際に<strong>「やってみようと思えた」「すぐに試したくなった」</strong>という前向きな変化を報告しています。
+                        プロンプトのテンプレートも提供されるため、まずは<strong>真似から始めて、徐々に自分のスタイル</strong>を確立できます。
+                    </dd>
+
+                    <dt>Q2: CanvaとMiriCanvasの違いは何ですか?</dt>
+                    <dd>
+                        A2: MiriCanvasは<strong>AI生成画像の文字修正や編集</strong>において優れた機能を持っています。
+                        Canvaを使っている方でも<strong>ストレスなく移行</strong>でき、両ツールを用途に応じて使い分けることで、
+                        より効率的なデザインワークフローを構築できます。実際のセミナーでは、
+                        <strong>文字化けした部分を簡単に削除・修正する方法</strong>が実演されています。
+                    </dd>
+
+                    <dt>Q3: プロンプトはどのように作ればいいですか?</dt>
+                    <dd>
+                        A3: セミナーでは<strong>実践的で即使えるプロンプト</strong>が提供されます。参加者からは
+                        <strong>「期待以上の生成ができた」「すぐに作ってみた」</strong>という声が多数。
+                        基本的なプロンプトから始めて、<strong>デザインの基礎知識</strong>を学びながら徐々にレベルアップしていく
+                        アプローチが推奨されています。
+                    </dd>
+
+                    <dt>Q4: 「問題発見力」とは具体的にどういうことですか?</dt>
+                    <dd>
+                        A4: デザイナーに求められるのは<strong>「問題解決力」から「問題発見力」へシフト</strong>しています。
+                        クライアントや組織が気づいていない<strong>本質的な課題を見つけ出す力</strong>こそが、
+                        これからのデザイナーの価値。単に依頼された通りに作るのではなく、
+                        <strong style="color: var(--accent-color-4);">「なぜこのデザインが必要なのか」「本当に解決すべき問題は何か」</strong>を
+                        考える視点が重要です。
+                    </dd>
+
+                    <dt>Q5: どのくらいの時間で実践レベルに到達できますか?</dt>
+                    <dd>
+                        A5: セミナー参加者の多くが<strong>「すぐに実践したい」「早速使ってみる」</strong>と回答しており、
+                        学んだその日から実践できる内容です。ただし、<strong>「場数を踏む」</strong>ことが重要で、
+                        継続的に作り続けることでスキルが向上します。提供されたプロンプトやテクニックを使って、
+                        まずは<strong>小さなプロジェクトから始めてみる</strong>ことをお勧めします。
+                    </dd>
+
+                    <dt>Q6: 書籍とセミナーの違いは?</dt>
+                    <dd>
+                        A6: 書籍では<strong>デザインの基礎から体系的に学べる</strong>一方、セミナーでは
+                        <strong>実際の操作画面を見ながら具体的なテクニック</strong>を学べます。
+                        参加者からは<strong>「書籍を片手にセミナーを受けるとより理解が深まった」</strong>という声があり、
+                        両方を組み合わせることで最大の学習効果が得られます。
+                    </dd>
+                </dl>
+
+                <h3 style="color: var(--accent-color-3); margin-top: 40px;">🔮 参加者が今後学びたいテーマ</h3>
+                <p>セミナー参加者から寄せられた、今後のセミナーへの期待:</p>
+                
+                <div class="tool-comparison" style="margin-top: 20px;">
+                    <div class="tool-card">
+                        <h4 style="font-size: 1em;">🎬 動画・映像制作</h4>
+                        <ul style="font-size: 0.9em; padding-left: 20px;">
+                            <li>AIマンガ作成</li>
+                            <li>AIショートムービー</li>
+                            <li>生成AI動画の詳しい解説</li>
+                            <li>動画編集のノウハウ</li>
+                        </ul>
+                    </div>
+                    <div class="tool-card">
+                        <h4 style="font-size: 1em;">🎨 デザインの深掘り</h4>
+                        <ul style="font-size: 0.9em; padding-left: 20px;">
+                            <li>グラデーション文字の作り方</li>
+                            <li>カラーパレットの作成</li>
+                            <li>MiriCanvasでのLP作成</li>
+                            <li>より実践的なデザイン技法</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tool-comparison" style="margin-top: 15px;">
+                    <div class="tool-card">
+                        <h4 style="font-size: 1em;">🤖 AI活用の応用</h4>
+                        <ul style="font-size: 0.9em; padding-left: 20px;">
+                            <li>AIエージェント活用</li>
+                            <li>画像生成の高度なテクニック</li>
+                            <li>プロンプトエンジニアリング</li>
+                            <li>AIとコーディングの統合</li>
+                        </ul>
+                    </div>
+                    <div class="tool-card">
+                        <h4 style="font-size: 1em;">⚡ 業務効率化</h4>
+                        <ul style="font-size: 0.9em; padding-left: 20px;">
+                            <li>GASでの軽量webアプリ作成</li>
+                            <li>主婦・ママの時短術</li>
+                            <li>デザインとフロントエンド効率化</li>
+                            <li>ツール比較（CanvaとMiriCanvas）</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="quote" style="margin-top: 30px; background-color: #e8f5e9;">
+                    <p style="font-size: 1.05em;">
+                        <strong style="color: var(--accent-color-4);">「なんとなくデザインが良い」という感覚を言語化・イメージ化するテクニック</strong>
+                        についてのセミナーを希望する声もあり、デザインの本質をさらに深く学びたいという
+                        意欲的な参加者が多いことが伺えます。
+                    </p>
+                </div>
+            </section>
+
+            <section style="background-color: #f0f9f0; padding: 30px; border-radius: 8px; margin-top: 40px;">
+                <h2 style="text-align: center; color: var(--main-color);">🎊 セミナーの雰囲気と参加者の声</h2>
+                
+                <h3 style="color: var(--accent-color-1);">💬 セミナー全体の印象</h3>
+                
+                <div class="quote">
+                    <p>"毎回川合さんのウェビナーを楽しみにしています。
+                    今回も<strong>とても参考になる内容を分かりやすくプレゼンしていただき、あっという間の時間</strong>でした。
+                    ありがとうございます。"</p>
+                    <p><em>- 40代 個人事業主</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"丁寧な説明でわかりやすかったです！
+                    <strong style="color: var(--accent-color-4);">（スライドのデザインもいつも参考にさせていただいております）</strong>"</p>
+                    <p><em>- 30代 個人事業主</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"実際の作業を垣間見ることができて勉強になりました。<strong>貴重な機会をありがとうございました</strong>。"</p>
+                    <p><em>- 30代 会社員</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"当初は内輪感満載、疎外感すら感じたが、<strong>KAWAIさんの落ち着いた語り口に接して安心しました</strong>。
+                    「問題解決力より問題発見力」は考えたことがなかったが、言われてみればそのとおりで、
+                    そのくらいの転機にどう対応するのか、に思いを至らせることができる貴重な時間でした。ありがとうございました！"</p>
+                    <p><em>- 40代 会社員</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"MIRAICHIさんのセミナーも初参加だったのですが、<strong>堅苦しくなく、楽しくやっていこうという雰囲気が素敵</strong>だなと思いました。
+                    魅力的なセミナーがたくさんあったので、またぜひ参加させていただきたいなと思っております。"</p>
+                    <p><em>- 30代 会社員</em></p>
+                </div>
+
+                <h3 style="color: var(--accent-color-1);">🌟 KAWAIさんへの応援メッセージ</h3>
+
+                <div class="quote">
+                    <p>"本の出版、おめでとうございます＾＾
+                    そして、<strong>いつもわかりやすい、説明ありがとうございます</strong>╰(*´︶`*)╯♡
+                    プロンプト使わせて頂きます"</p>
+                    <p><em>- 40代 会社員</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"本の出版本当におめでとうございます！！<strong>いつも楽しくしっかり学ばせていただいています</strong>。
+                    いつもありがとうございます！！アウトプットは場数踏むしかない気がするので、もっとたくさん作って練習したいと思います。
+                    <strong style="color: var(--accent-color-4);">今後もセミナー楽しみにしています</strong>のでよろしくお願いします！"</p>
+                    <p><em>- 30代 求職中</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"かわいさん、今日も素敵なウェビナーありがとうございました！
+                    MiriCanvasで簡単に文字化け部分が削除できたり編集もできて、これからたくさん使っていきたいです！！
+                    <strong>意味をつくる。シンプルかつグッと入ってくる言葉ですね</strong>☺️
+                    書籍出版本当におめでとうございます！🎉<strong>Voicyも拝聴しています、これからも学ばせていただき、応援しています</strong>！"</p>
+                    <p><em>- 30代 個人事業主</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"KAWAIさん、いつも心に残るお話をありがとうございます！
+                    <strong>毎回「デザイン＝伝える力」を新しい角度から教えてもらえて、聞くたびに視野が広がります</strong>。
+                    今回も「問題発見力」というキーワードが印象的でした。
+                    ついクライアントさんの好みなど見た目ばかりに意識が向きがちで、問題を見つける力こそ、必要なんだと感じました。"</p>
+                    <p><em>- 40代 個人事業主</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"本日もとても有益な情報、ありがとうございました！３日間、出版記念ウェビナーお疲れ様でした。
+                    私も３回とも拝聴させていただきました。遠方に住んでいるため、リアルでお会いする機会がなかなかありませんが、
+                    <strong>いつかお会いしたときには本にサインをいただきたいです</strong>！
+                    それまでにはAIをつかっていろいろなパターンの広告バナーを量産できるようになります。
+                    <strong style="color: var(--accent-color-4);">アウトプットもしっかりしていきたい</strong>と思います。"</p>
+                    <p><em>- 40代 個人事業主</em></p>
+                </div>
+
+                <h3 style="color: var(--accent-color-1);">📝 デザイン学習への新たな視点</h3>
+
+                <div class="quote">
+                    <p>"デザインの基礎から実践まで知っているからこその、プロンプトだと感じました。
+                    普段は、文章作成に生成AIを使っていますが、<strong>画像生成についても検討したいなと思いました</strong>。
+                    良い機会になりました。ありがとうございます。"</p>
+                    <p><em>- 50代 個人事業主</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"書籍の内容が気になってウェビナーに参加しました。<strong>とても暖かい雰囲気で色々と有益なお話が聞けました</strong>。
+                    気軽に無料でも参加できる点が良かったです。
+                    <strong style="color: var(--accent-color-4);">AIのプロンプト、ツールとの組み合わせの可能性が無限でワクワクしますね</strong>。"</p>
+                    <p><em>- 50代 会社員</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"今回はたいへん貴重な講義をありがとうございました。SHIFTAIから参加させさせていただきました。
+                    <strong>実際の画面で、丁寧に解説していただき、とても分かりやすかった</strong>です。
+                    書籍をみながら、色々デザインしてみたいと思います。
+                    <strong style="color: var(--accent-color-4);">デザイン思考という考え方がとても感銘をうけました</strong>。"</p>
+                    <p><em>- 60代以上 個人事業主</em></p>
+                </div>
+
+                <h3 style="color: var(--accent-color-1);">🎯 具体的な活用イメージ</h3>
+
+                <div class="quote">
+                    <p>"今までCanvaを使用していましたが、AIの機能もまだ微妙なところも多いので、
+                    <strong>ミリキャンバスを使いこなせるようにチャレンジしていきたい</strong>と思います。"</p>
+                    <p><em>- 40代 個人事業主</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"今回初めてMIRAICHIさんのセミナーに参加させていただきました！
+                    今回は基本的な部分だったかと思いますがその部分さえもなかなか踏み出せず、
+                    ずっと<strong>使えたら便利だよなと思っていたMiriCanvasを触るきっかけをいただきました</strong>！
+                    今後サムネイル作成をしていく予定があるものの相手からの素材提供が少ないので、
+                    <strong style="color: var(--accent-color-4);">AIの力をしっかり借りることができるMiriCanvasをもっと使っていこう</strong>と思います！"</p>
+                    <p><em>- 40代 個人事業主</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"ミリキャンバスを使ったデザインのお話ということで、滑り込みで参加させていただきました！
+                    先月AIスライドコンテストで初めて触れたばかりですが、<strong>アレンジの幅が広がりそうでワクワクしました</strong>。
+                    ありがとうございました！"</p>
+                    <p><em>- 40代 主婦</em></p>
+                </div>
+
+                <h3 style="color: var(--accent-color-1);">🚀 今後への期待と活用意欲</h3>
+
+                <div class="quote">
+                    <p>"本日はありがとうございました。<strong>SORAを使ってみたいと思いました</strong>！
+                    画像固定する方法などプロンプトを学びたいと思いました。"</p>
+                    <p><em>- 30代 個人事業主</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"AIとmiricanvasを組み合わせて使ってみようと思います。
+                    <strong>もう少しレベルの高い実践的な内容のセミナーがあるとうれしい</strong>です。"</p>
+                    <p><em>- その他 個人事業主</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"KAWAIさんのセミナーはいつも本当に勉強になります！<strong style="color: var(--accent-color-4);">ありがたや～ありがたや～</strong>"</p>
+                    <p><em>- 30代 会社員</em></p>
+                </div>
+
+                <div class="quote">
+                    <p>"面白かったので<strong>ミリキャンバス登録してみました</strong>！"</p>
+                    <p><em>- 30代 会社員</em></p>
+                </div>
+            </section>
+
+            <section style="background-color: #fff3e0; padding: 30px; border-radius: 8px; margin-top: 30px;">
+                <h2 style="text-align: center; color: var(--main-color);">✨ 最後に</h2>
+                <p style="text-align: center; font-size: 1.1em; line-height: 1.8;">
+                    このセミナーは、<strong style="color: var(--accent-color-4);">「デザインが楽しい」</strong>と感じられる体験を提供します。<br>
+                    AIとデザインツールの組み合わせにより、<strong>誰でもプロ級のデザインが実現可能</strong>な時代。<br>
+                    <strong>「意味をつくる」</strong>というデザインの本質を理解し、<br>
+                    <strong style="color: var(--accent-color-4);">「問題発見力」</strong>を持つデザイナーへの第一歩を踏み出しましょう。
+                </p>
+                <p style="text-align: center; margin-top: 20px;">
+                    <strong>💡 すぐに実践できるプロンプトとテクニックで、あなたのデザインワークを変革します</strong>
+                </p>
+                <p style="text-align: center; margin-top: 15px; font-size: 0.95em; color: #666;">
+                    150名以上の参加者から寄せられた高い評価と具体的な成果報告<br>
+                    <strong style="color: var(--accent-color-4);">「すぐに試したくなった」「やってみようと思えた」</strong>という声多数
+                </p>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

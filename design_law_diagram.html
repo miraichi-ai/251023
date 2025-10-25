@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>売れるデザイン7つの法則 - 図解版</title>
+  
+  <!-- Mermaid.js の読み込み -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: 'base',
+        securityLevel: 'loose',
+        fontFamily: '"Kaisei Decol", "Segoe UI", sans-serif',
+        themeVariables: {
+          primaryColor: '#4CAF50',
+          primaryTextColor: '#333',
+          primaryBorderColor: '#009688',
+          lineColor: '#34BFBF',
+          secondaryColor: '#FFC107',
+          tertiaryColor: '#9575CD'
+        },
+        flowchart: {
+          cornerRadius: 15,
+          curve: 'cardinal',
+          htmlLabels: true
+        }
+      });
+    });
+  </script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: '"Kaisei Decol", "Segoe UI", sans-serif';
+      background-color: #FAFAFA;
+      color: #333;
+      line-height: 1.8;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 60px;
+      background: linear-gradient(135deg, #4CAF50 0%, #009688 100%);
+      padding: 40px 20px;
+      border-radius: 15px;
+      color: #333;
+    }
+    
+    header h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    
+    header p {
+      font-size: 1.1em;
+      color: #555;
+    }
+    
+    .section {
+      background-color: white;
+      padding: 40px;
+      margin-bottom: 40px;
+      border-radius: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-left: 5px solid #4CAF50;
+    }
+    
+    .section h2 {
+      font-size: 1.8em;
+      color: #4CAF50;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .section h3 {
+      font-size: 1.3em;
+      color: #009688;
+      margin-top: 30px;
+      margin-bottom: 15px;
+    }
+    
+    .subsection {
+      background-color: #f9f9f9;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 10px;
+      border-left: 3px solid #FFC107;
+    }
+    
+    .insight-box {
+      background-color: #fff8e1;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 10px;
+      border-left: 4px solid #FFC107;
+      color: #333;
+    }
+    
+    .point-box {
+      background-color: #e8f5e9;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 10px;
+      border-left: 4px solid #4CAF50;
+    }
+    
+    .color-palette {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      margin: 20px 0;
+    }
+    
+    .color-box {
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .color-label {
+      font-weight: bold;
+      color: #333;
+      margin-top: 10px;
+    }
+    
+    .diagram-container {
+      background-color: #f5f5f5;
+      padding: 30px;
+      margin: 30px 0;
+      border-radius: 15px;
+      overflow-x: auto;
+    }
+    
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    
+    .info-table th,
+    .info-table td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    .info-table th {
+      background-color: #4CAF50;
+      color: #333;
+      font-weight: bold;
+    }
+    
+    .info-table tr:hover {
+      background-color: #f9f9f9;
+    }
+    
+    .timeline {
+      position: relative;
+      padding: 20px 0;
+    }
+    
+    .timeline-item {
+      padding-left: 30px;
+      padding-bottom: 20px;
+      position: relative;
+    }
+    
+    .timeline-item:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 5px;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background-color: #4CAF50;
+      border: 3px solid #009688;
+    }
+    
+    .timeline-item:after {
+      content: '';
+      position: absolute;
+      left: 6px;
+      top: 20px;
+      width: 3px;
+      height: calc(100% + 10px);
+      background-color: #9575CD;
+    }
+    
+    .timeline-item:last-child:after {
+      display: none;
+    }
+    
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #666;
+      border-top: 2px solid #4CAF50;
+      margin-top: 60px;
+    }
+
+    .emoji {
+      font-size: 1.3em;
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- ヘッダー -->
+    <header>
+      <h1>📚 売れるデザイン7つの法則</h1>
+      <p>視線と思考を操る！ヒットを狙う書籍表紙のデザイン戦略</p>
+    </header>
+
+    <!-- セクション1: 書籍紹介 -->
+    <div class="section">
+      <h2><span class="emoji">📖</span>対象書籍について</h2>
+      
+      <div class="subsection">
+        <h3>書籍の基本情報</h3>
+        <p><strong>タイトル：</strong>「AIで0からデザイン」</p>
+        <p><strong>発売日：</strong>2024年10月21日</p>
+        <p><strong>目的：</strong>デザイナーでない人も、AIを使ってデザインをサクッと作成できるようにする</p>
+      </div>
+
+      <div class="point-box">
+        <strong>📌 本書の特徴</strong>
+        <ul style="margin-top: 10px; margin-left: 20px;">
+          <li>画像生成だけでなく、デザイン作成まで一貫して実践</li>
+          <li>従来のAI本やブログ向けデザイン本とは異なるアプローチ</li>
+          <li>実践的な75個のプロンプトと手法を厳選</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- セクション2: タイトルの視覚的構成 -->
+    <div class="section">
+      <h2><span class="emoji">🎯</span>法則①：キラーワードと大きさのバランス</h2>
+      
+      <div class="diagram-container">
+        <div class="mermaid">
+          graph TD
+            A["表紙全体の視点"] --> B["キラーワード<br/>『AI』を最初に認識"]
+            B --> C["大きさのバランスが<br/>最適化されている"]
+            C --> D["『0カラー』が<br/>やや上に飛び出す"]
+            D --> E["違和感が目立つ効果を生む"]
+            
+            style A fill:#e8f5e9,stroke:#4CAF50,stroke-width:2px,color:#333
+            style B fill:#fff8e1,stroke:#FFC107,stroke-width:2px,color:#333
+            style C fill:#fff8e1,stroke:#FFC107,stroke-width:2px,color:#333
+            style D fill:#e8f5e9,stroke:#4CAF50,stroke-width:2px,color:#333
+            style E fill:#e8f5e9,stroke:#4CAF50,stroke-width:2px,color:#333
+        </div>
+      </div>
+
+      <div class="insight-box">
+        <strong>🔍 デザイン洞察：違和感の価値</strong>
+        <p style="margin-top: 10px;">
+          綺麗すぎるデザインは情報として人々に認識されません。違和感があることで、脳が「注意を払うべき情報」として判断し、目に止まりやすくなります。
+        </p>
+      </div>
+
+      <div class="subsection">
+        <h3>タイトル変更の経緯</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <strong>初案：</strong>「AIで0からデザイン」（数字の「0」を使用）
+          </div>
+          <div class="timeline-item">
+            <strong>検討：</strong>数字の強さを活かしたデザイン vs. ルビ表記の検討
+          </div>
+          <div class="timeline-item">
+            <strong>決定：</strong>カタカナの「ゼロ」に変更
+          </div>
+          <div class="timeline-item">
+            <strong>効果：</strong>分かりやすさが向上し、視認性が大幅に改善
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- セクション3: 違和感の重要性 -->
+    <div class="section">
+      <h2><span class="emoji">⚡</span>法則②：違和感が記憶に残す</h2>
+      
+      <div class="point-box">
+        <strong>脳の省映え機能（コスト最小化）</strong>
+        <ul style="margin-top: 10px; margin-left: 20px;">
+          <li>同じような情報・慣れた情報は自動的にフィルタリングされる</li>
+          <li>違和感のない情報は情報として受け取られない</li>
+          <li>新しい、または異なる情報が脳を刺激する</li>
+        </ul>
+      </div>
+
+      <div class="diagram-container">
+        <div class="mermaid">
+          graph LR
+            A["情報入力"] --> B{"違和感<br/>あり？"}
+            B -->|いいえ| C["脳がフィルタリング<br/>（記憶されない）"]
+            B -->|はい| D["脳が注意を払う<br/>（記憶に残る）"]
+            C --> E["表示効果なし"]
+            D --> F["高い訴求力"]
+            
+            style A fill:#e8f5e9,stroke:#4CAF50,stroke-width:2px,color:#333
+            style B fill:#fff8e1,stroke:#FFC107,stroke-width:2px,color:#333
+            style C fill:#ffebee,stroke:#E91E63,stroke-width:2px,color:#333
+            style D fill:#e8f5e9,stroke:#4CAF50,stroke-width:2px,color:#333
+            style E fill:#ffebee,stroke:#E91E63,stroke-width:2px,color:#333
+            style F fill:#c8e6c9,stroke:#4CAF50,stroke-width:2px,color:#333
+        </div>
+      </div>
+    </div>
+
+    <!-- セクション4: イラストとデザインの分業 -->
+    <div class="section">
+      <h2><span class="emoji">🎨</span>法則③：専門家の分業による相乗効果</h2>
+      
+      <table class="info-table">
+        <tr>
+          <th>役割</th>
+          <th>担当者</th>
+          <th>内容</th>
+        </tr>
+        <tr>
+          <td><strong>イラスト</strong></td>
+          <td>長田ナツ木さん</td>
+          <td>キャラクター・ビジュアル要素</td>
+        </tr>
+        <tr>
+          <td><strong>デザイン・レイアウト</strong></td>
+          <td>カナさん</td>
+          <td>全体構成・配置・タイポグラフィ</td>
+        </tr>
+      </table>
+
+      <div class="insight-box">
+        <strong>✨ 選定プロセス</strong>
+        <p style="margin-top: 10px;">
+          各分野で3名ずつの候補から選出。著者が第1候補の候補者を選択し、その結果、イラストとデザインの相乗効果が最大化されました。
+        </p>
+      </div>
+
+      <div class="subsection">
+        <h3>制作の流れ</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <strong>ステップ1：</strong>イラスト完成
+          </div>
+          <div class="timeline-item">
+            <strong>ステップ2：</strong>イラストをベースにレイアウト設計
+          </div>
+          <div class="timeline-item">
+            <strong>ステップ3：</strong>著者からのオーダー実現
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- セクション5: 表紙レイアウト戦略 -->
+    <div class="section">
+      <h2><span class="emoji">📐</span>法則④：アイコニックなセンター配置</h2>
+      
+      <div class="point-box">
+        <strong>レイアウト構成</strong>
+        <ul style="margin-top: 10px; margin-left: 20px;">
+          <li><strong>中央：</strong>イラスト（目を引く要素）</li>
+          <li><strong>上部：</strong>著者名</li>
+          <li><strong>両側：</strong>「AI」と「ゼロカラーデザイン」（縦書き）</li>
+        </ul>
+      </div>
+
+      <div class="diagram-container">
+        <div class="mermaid">
+          graph TB
+            A["表紙構成の視覚効果"] --> B["真ん中：アイコニックなイラスト"]
+            A --> C["両端：2本の線状のテキスト"]
+            B --> D["強いビジュアル軸を形成"]
+            C --> D
+            D --> E["細目で見ると<br/>円×2本の線=記号化"]
+            E --> F["抽象的な図形として<br/>脳に残る"]
+            
+            style A fill:#e8f5e9,stroke:#4CAF50,stroke-width:2px,color:#333
+            style B fill:#c8e6c9,stroke:#4CAF50,stroke-width:2px,color:#333
+            style C fill:#c8e6c9,stroke:#4CAF50,stroke-width:2px,color:#333
+            style D fill:#a5d6a7,stroke:#4CAF50,stroke-width:2px,color:#333
+            style E fill:#fff8e1,stroke:#FFC107,stroke-width:2px,color:#333
+            style F fill:#fff8e1,stroke:#FFC107,stroke-width:2px,color:#333
+        </div>
+      </div>
+
+      <div class="insight-box">
+        <strong>🎯 図形化による記憶効果</strong>
+        <p style="margin-top: 10px;">
+          人間の脳は、複雑な情報よりも単純な図形を高速に認識・記憶します。表紙をぼんやり見た時に、円（イラスト）と2本の線（テキスト）という記号として認識されることで、強い視覚的インパクトを生み出します。
+        </p>
+      </div>
+    </div>
+
+    <!-- セクション6: 視線の導線設計 -->
+    <div class="section">
+      <h2><span class="emoji">👁️</span>法則⑤：時間軸を含めた視線導線</h2>
+      
+      <div class="subsection">
+        <h3>情報伝達の優先順位</h3>
+        <div class="diagram-container">
+          <div class="mermaid">
+            graph TD
+              A["表紙を見た瞬間"] --> B["第1段階：タイトル + イラスト"]
+              B --> C["視線が惹きつけられる"]
+              C --> D["第2段階：『厳選プロンプト75』"]
+              D --> E["価値提案が伝わる"]
+              E --> F["第3段階：その他の情報"]
+              F --> G["包括的な理解が形成"]
+              
+              style A fill:#e8f5e9,stroke:#4CAF50,stroke-width:2px,color:#333
+              style B fill:#c8e6c9,stroke:#4CAF50,stroke-width:2px,color:#333
+              style D fill:#fff8e1,stroke:#FFC107,stroke-width:2px,color:#333
+              style F fill:#f3e5f5,stroke:#9575CD,stroke-width:2px,color:#333
+            </style>
+          </div>
+        </div>
+      </div>
+
+      <div class="insight-box">
+        <strong>📺 静止画における時間軸</strong>
+        <p style="margin-top: 10px;">
+          表紙は平面ですが、視線の導線を計算することで、映像のような時間軸を表現することができます。「最初に何が見えるか」「次に目が向くか」という流れが設計されているため、情報の伝達が効率化されます。
+        </p>
+      </div>
+
+      <div class="subsection">
+        <h3>視線の流れ</h3>
+        <table class="info-table">
+          <tr>
+            <th>段階</th>
+            <th>視線が向く場所</th>
+            <th>目的</th>
+          </tr>
+          <tr>
+            <td>①（最初）</td>
+            <td>タイトル × イラスト</td>
+            <td>関心を引く、主要メッセージ</td>
+          </tr>
+          <tr>
+            <td>②（次に）</td>
+            <td>「厳選プロンプト75」</td>
+            <td>具体的な価値提案</td>
+          </tr>
+          <tr>
+            <td>③（その後）</td>
+            <td>その他の説明文</td>
+            <td>詳細情報・補足</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- セクション7: 多様性の視覚化 -->
+    <div class="section">
+      <h2><span class="emoji">🌈</span>法則⑥：できることを視覚的に伝える</h2>
+      
+      <div class="insight-box">
+        <strong>デザインの可能性を一目で理解</strong>
+        <p style="margin-top: 10px;">
+          男性の周りに、広告・ビジュアル・ランニングページなどのデザイン例を配置することで、この書籍を読むと「様々な種類のデザインが作れるようになる」という価値を瞬時に伝えます。
+        </p>
+      </div>
+
+      <div class="subsection">
+        <h3>レイアウト要素</h3>
+        <ul style="margin: 20px 0; margin-left: 20px;">
+          <li><strong>中央のキャラクター：</strong>学習者のイメージ</li>
+          <li><strong>周囲の多彩なビジュアル：</strong>習得できるデザイン種類</li>
+          <li><strong>バラエティ豊かな配色：</strong>色彩スキルも身につくイメージ</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- セクション8: 色彩戦略 -->
+    <div class="section">
+      <h2><span class="emoji">🎨</span>法則⑦：色彩戦略と補色の活用</h2>
+      
+      <div class="subsection">
+        <h3>色選択の検討プロセス</h3>
+        <div class="point-box">
+          <strong>黄色 vs ピンク</strong>
+          <ul style="margin-top: 10px; margin-left: 20px;">
+            <li>初期段階：黄色またはピンクで検討</li>
+            <li>決定理由：蛍光イエロー（蛍光色）を選択</li>
+            <li>効果：実際の印刷で光が反射し、驚異的な目立ち度</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>使用色パレット</h3>
+      </div>
+
+      <div class="color-palette">
+        <div class="color-box" style="background-color: #3B82F6;">
+          <div style="width: 100%; height: 80px; background-color: #3B82F6; border-radius: 8px;"></div>
+          <div class="color-label">男性の服<br/>（青）</div>
+        </div>
+        <div class="color-box" style="background-color: #FBBF24;">
+          <div style="width: 100%; height: 80px; background-color: #FBBF24; border-radius: 8px;"></div>
+          <div class="color-label">蛍光イエロー<br/>（ハイライト）</div>
+        </div>
+        <div class="color-box" style="background-color: #F59E0B;">
+          <div style="width: 100%; height: 80px; background-color: #F59E0B; border-radius: 8px;"></div>
+          <div class="color-label">補助色<br/>（オレンジ）</div>
+        </div>
+      </div>
+
+      <div class="insight-box">
+        <strong>🌊 補色関係による視覚効果</strong>
+        <p style="margin-top: 10px;">
+          <strong>青 × 黄色 = 補色関係</strong><br>
+          色相環上で正反対に位置する色を組み合わせることで、強いコントラストが生まれます。これにより、デザインが目立ち、視覚的なインパクトが最大化されます。
+        </p>
+      </div>
+
+      <div class="subsection">
+        <h3>色彩設計の深掘り</h3>
+        <p>本書「AIで0からデザイン」では、このような色彩戦略についても詳しく解説されています。読者は表紙を見た後に本の内容を学ぶことで、デザインの原理原則をより深く理解でき、見え方が変わってくるでしょう。</p>
+      </div>
+    </div>
+
+    <!-- セクション9: 統合図 -->
+    <div class="section">
+      <h2><span class="emoji">🔗</span>7つの法則の統合フレームワーク</h2>
+      
+      <div class="diagram-container">
+        <div class="mermaid">
+          graph TB
+            A["売れるデザインの7つの法則"] 
+            
+            A --> B["法則①<br/>キラーワード×バランス"]
+            A --> C["法則②<br/>違和感の価値"]
+            A --> D["法則③<br/>専門家の分業"]
+            A --> E["法則④<br/>アイコニック配置"]
+            A --> F["法則⑤<br/>視線導線"]
+            A --> G["法則⑥<br/>多様性の可視化"]
+            A --> H["法則⑦<br/>補色戦略"]
+            
+            B --> I["売れる表紙"]
+            C --> I
+            D --> I
+            E --> I
+            F --> I
+            G --> I
+            H --> I
+            
+            I --> J["読者の興味を引く"]
+            I --> K["売上向上"]
+            I --> L["記憶に残るデザイン"]
+            
+            style A fill:#e8f5e9,stroke:#4CAF50,stroke-width:3px,color:#333
+            style I fill:#c8e6c9,stroke:#4CAF50,stroke-width:2px,color:#333
+            style B fill:#fff8e1,stroke:#FFC107,stroke-width:1.5px,color:#333
+            style C fill:#fff8e1,stroke:#FFC107,stroke-width:1.5px,color:#333
+            style D fill:#fff8e1,stroke:#FFC107,stroke-width:1.5px,color:#333
+            style E fill:#fff8e1,stroke:#FFC107,stroke-width:1.5px,color:#333
+            style F fill:#fff8e1,stroke:#FFC107,stroke-width:1.5px,color:#333
+            style G fill:#fff8e1,stroke:#FFC107,stroke-width:1.5px,color:#333
+            style H fill:#fff8e1,stroke:#FFC107,stroke-width:1.5px,color:#333
+        </div>
+      </div>
+    </div>
+
+    <!-- フッター -->
+    <div class="footer">
+      <p><strong>📚 参考書籍：</strong>「AIで0からデザイン」（2024年10月21日発売）</p>
+      <p style="margin-top: 10px; font-size: 0.9em;">この図解は、YouTubeの動画トランスクリプトをもとに、デザイン戦略の要素を整理・視覚化したものです。</p>
+    </div>
+  </div>
+</body>
+</html>
