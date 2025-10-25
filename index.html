@@ -16,17 +16,20 @@
     <style>
         /* サムネイルの正確な色をここで定義・適用 */
         :root {
-            --brand-blue: #0052CC; /* ご要望に基づき、以前の#0165FFより少し濃い青に変更 */
-            --brand-yellow: #FFEB00; /* サムネイルのアクセントの鮮やかな黄 */
-            --brand-black: #1f2937; /* text-gray-900 ほぼ黒 */
-            --brand-white: #FFFFFF;
+            --brand-blue: #0052CC; /* アクセントの鮮やかな青 */
+            --brand-yellow: #FFEB00; /* アクセントの鮮やかな黄 */
+            --brand-black: #1f2937; /* メインタイトルなどに使う黒 */
+            --brand-white: #FFFFFF; /* カードの背景に使う白 */
+            --brand-light-gray: #f9fafb; /* ページ背景を真っ白から少し変更 */
         }
 
         body {
             /* 本文フォントをおしゃれな Lato に変更 */
             font-family: 'Lato', 'Noto Sans JP', sans-serif;
-            /* 背景をサムネイルの鮮やかな青（少し濃いめ）に設定 */
-            background-color: var(--brand-blue);
+            /* 背景を非常に薄いグレー（ほぼ白）に設定 */
+            background-color: var(--brand-light-gray);
+            position: relative; /* アニメーションの基準点 */
+            overflow-x: hidden; /* 横スクロール防止 */
         }
 
         /* 見出しフォントをおしゃれな Poppins に変更 */
@@ -34,18 +37,33 @@
             font-family: 'Poppins', 'Zen Kaku Gothic New', sans-serif;
         }
 
-        /* カードのスタイル（サムネイルの白い本をイメージ） */
+        /* カードのスタイル（白背景 + 青いトップボーダー） */
         .link-card {
+            /* 背景色を白に戻す */
             background-color: var(--brand-white);
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            border: 1px solid #e5e7eb;
+            /* 上部に鮮やかな青の太いボーダーを追加 */
+            border-top: 8px solid var(--brand-blue);
             border-radius: 1rem; /* rounded-2xl */
+            /* subtle な影 */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
         }
 
         .link-card:hover {
             transform: translateY(-8px);
-            /* ホバー時の影を少し濃くして目立たせる */
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.25), 0 8px 10px -6px rgba(0, 0, 0, 0.15);
+            /* ホバー時の影を、サムネイルの青に合わせて調整 */
+            box-shadow: 0 20px 25px -5px rgba(0, 82, 204, 0.2), 0 8px 10px -6px rgba(0, 82, 204, 0.1);
+        }
+
+        /* カード内の見出しを黒に戻す */
+        .link-card h2 {
+            color: var(--brand-black);
+        }
+
+        /* カード内の本文をダークグレーに戻す */
+        .link-card p {
+            color: #374151; /* text-gray-700 */
+            opacity: 0.9;
         }
 
         /* サムネイルのイエローアクセントを再現 */
@@ -58,16 +76,52 @@
             display: inline-block; /* バナーのように扱う */
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
+
+        /* --- 背景の花吹雪アニメーション --- */
+        #particle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* 背景の最背面 */
+            pointer-events: none; /* クリックを透過 */
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            /* アニメーション（fall）を適用 */
+            animation: fall linear infinite;
+            opacity: 0; /* 最初は透明 */
+        }
+
+        /* 落ちるアニメーション */
+        @keyframes fall {
+            0% {
+                transform: translateY(-20vh) rotate(0deg);
+                opacity: 0.5;
+            }
+            100% {
+                /* 画面の下まで落ち、少し横にずれる */
+                transform: translateY(120vh) rotate(720deg);
+                opacity: 0.3;
+            }
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-4 md:p-8">
 
-    <div class="w-full max-w-6xl mx-auto">
+    <!-- 花吹雪アニメーションのコンテナ -->
+    <div id="particle-container"></div>
+
+    <div class="w-full max-w-6xl mx-auto z-10"> <!-- コンテンツが花吹雪の上に来るように z-10 を追加 -->
         
         <!-- ヘッダーセクション -->
         <header class="text-center mb-8 md:mb-12">
             <!-- メインタイトル -->
-            <h1 class="text-2xl md:text-3xl lg:text-4xl font-black text-white leading-tight mb-4">
+            <h1 class="text-2xl md:text-3xl lg:text-4xl font-black text-gray-900 leading-tight mb-4">
                 <!-- サムネイルのイエローバナーを再現 -->
                 <span class="accent-yellow-banner text-lg md:text-xl lg:text-2xl">
                     著者本人が直伝
@@ -75,16 +129,16 @@
                 <span class="block mt-3">
                     「AIでゼロからデザイン」実践ウェビナー
                 </span>
-                <span class="text-xl md:text-2xl lg:text-3xl text-gray-200 block mt-1">
+                <span class="text-xl md:text-2xl lg:text-3xl text-gray-700 block mt-1">
                     ～デザイナー未経験でもすぐ使えるプロンプト設計の極意～
                 </span>
             </h1>
             
             <!-- 日付とサブタイトル -->
-            <p class="text-lg md:text-xl font-bold text-gray-100 mb-2">
+            <p class="text-lg md:text-xl font-bold text-gray-700 mb-2">
                 （2025年10月23日） 🔸 まとめ図解リンク集
             </p>
-            <p class="text-xs md:text-sm text-gray-300 max-w-2xl mx-auto">
+            <p class="text-xs md:text-sm text-gray-500 max-w-2xl mx-auto">
                 ※文字起こしデータを元に作成しているため、誤字脱字や情報の誤りなども含まれている可能性があります。予めご了承ください。
             </p>
         </header>
@@ -95,12 +149,12 @@
             <!-- カード 1: セミナー概要 -->
             <a href="1-seminar-overview.html" class="link-card overflow-hidden block">
                 <div class="p-6">
-                    <!-- カード見出し (サムネイルの黒文字を再現) -->
-                    <h2 class="text-xl lg:text-2xl font-bold text-gray-900 mb-3">
+                    <!-- カード見出し (CSSで黒に設定) -->
+                    <h2 class="text-xl lg:text-2xl font-bold mb-3">
                         第1話：セミナー概要と「問題発見力」への招待
                     </h2>
-                    <!-- カード本文 -->
-                    <p class="text-gray-700 text-sm md:text-base leading-relaxed">
+                    <!-- カード本文 (CSSでダークグレーに設定) -->
+                    <p class="text-sm md:text-base leading-relaxed">
                         なぜ今AIデザインなのか？セミナーで得られる本質的な「問題発見力」と、デザインの未来についての全体像を掴みます。
                     </p>
                 </div>
@@ -109,10 +163,10 @@
             <!-- カード 2: マーケティングとデザインの基本原則 -->
             <a href="2-marketing-design-basics.html" class="link-card overflow-hidden block">
                 <div class="p-6">
-                    <h2 class="text-xl lg:text-2xl font-bold text-gray-900 mb-3">
+                    <h2 class="text-xl lg:text-2xl font-bold mb-3">
                         第2話：AI時代のマーケティングとデザインの基本原則
                     </h2>
-                    <p class="text-gray-700 text-sm md:text-base leading-relaxed">
+                    <p class="text-sm md:text-base leading-relaxed">
                         「誰に・何を・どのように」伝えるか。成果を出すためのマーケティング三要素と、人の目を引く「一貫性とサプライズ」のデザイン原則を学びます。
                     </p>
                 </div>
@@ -121,10 +175,10 @@
             <!-- カード 3: ビジネスデザイナーへの戦略 -->
             <a href="3-ai-strategy-flow.html" class="link-card overflow-hidden block">
                 <div class="p-6">
-                    <h2 class="text-xl lg:text-2xl font-bold text-gray-900 mb-3">
+                    <h2 class="text-xl lg:text-2xl font-bold mb-3">
                         第3話：「ビジネスデザイナー」への戦略と実践フロー
                     </h2>
-                    <p class="text-gray-700 text-sm md:text-base leading-relaxed">
+                    <p class="text-sm md:text-base leading-relaxed">
                         AIに仕事を奪われない「ビジネスデザイナー」とは？超パーソナライズ化時代を生き抜くための戦略と、具体的なマーケティングフローを図解します。
                     </p>
                 </div>
@@ -133,10 +187,10 @@
             <!-- カード 4: 売れるデザイン7つの法則 -->
             <a href="4-design-7laws.html" class="link-card overflow-hidden block">
                 <div class="p-6">
-                    <h2 class="text-xl lg:text-2xl font-bold text-gray-900 mb-3">
+                    <h2 class="text-xl lg:text-2xl font-bold mb-3">
                         第4話：図解・売れるデザイン「7つの法則」
                     </h2>
-                    <p class="text-gray-700 text-sm md:text-base leading-relaxed">
+                    <p class="text-sm md:text-base leading-relaxed">
                         なぜ、あのデザインは記憶に残るのか？視線と記憶を操る「違和感」や「補色戦略」など、具体的なデザインテクニックを7つの法則で徹底解説します。
                     </p>
                 </div>
@@ -145,10 +199,10 @@
             <!-- カード 5: Canva実践修正ガイド -->
             <a href="5-canva-practical-guide.html" class="link-card overflow-hidden block">
                 <div class="p-6">
-                    <h2 class="text-xl lg:text-2xl font-bold text-gray-900 mb-3">
+                    <h2 class="text-xl lg:text-2xl font-bold mb-3">
                         第5話：Canva実践修正ガイド - AI画像を完成させる5ステップ
                     </h2>
-                    <p class="text-gray-700 text-sm md:text-base leading-relaxed">
+                    <p class="text-sm md:text-base leading-relaxed">
                         AIが生成した画像の「文字化け」や「違和感」をどう修正するか。Canvaを使った「削除・修正・追加・拡張・調整」の全5ステップを実践的に学びます。
                     </p>
                 </div>
@@ -157,10 +211,10 @@
             <!-- カード 6: AIデザインの未来と心構え -->
             <a href="6-future-designer-mindset.html" class="link-card overflow-hidden block">
                 <div class="p-6">
-                    <h2 class="text-xl lg:text-2xl font-bold text-gray-900 mb-3">
+                    <h2 class="text-xl lg:text-2xl font-bold mb-3">
                         第6話：AIデザインの未来と「意味を作る力」
                     </h2>
-                    <p class="text-gray-700 text-sm md:text-base leading-relaxed">
+                    <p class="text-sm md:text-base leading-relaxed">
                         デザイナーの仕事は「問題を解く」から「問題を見つける」へ。AIを最強の武器にするための、これからの時代に必須の心構えと「意味づけ」の力を解説します。
                     </p>
                 </div>
@@ -170,18 +224,63 @@
 
         <!-- フッター -->
         <footer class="text-center mt-12 md:mt-16">
-            <!-- 背景が濃いため、フッターの文字も明るくする -->
-            <p class="text-sm text-gray-300">
+            <p class="text-sm text-gray-600">
                 &copy; 2025 MIRAICHI. All rights reserved.
             </p>
-            <p class="text-xs text-gray-400 mt-1">
+            <p class="text-xs text-gray-500 mt-1">
                 講師：川合卓也 (SHIT AI 最高デザイン責任者)
             </p>
         </footer>
 
     </div>
 
+    <!-- 花吹雪アニメーションの実行スクリプト -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('particle-container');
+            if (!container) return;
+
+            // 花吹雪の色
+            const colors = ['var(--brand-blue)', 'var(--brand-yellow)'];
+
+            function createParticle() {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // ランダムな値でパーティクルのスタイルを設定
+                const size = Math.random() * 8 + 4; // 4pxから12pxのサイズ
+                const x = Math.random() * 100; // 画面の横幅全体
+                const duration = Math.random() * 10 + 10; // 10秒から20秒かけて落ちる
+                const delay = Math.random() * 5; // 0秒から5秒の遅延
+                const color = colors[Math.floor(Math.random() * colors.length)];
+
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${x}vw`;
+                particle.style.backgroundColor = color;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+                
+                // 透明度をランダムに
+                particle.style.opacity = Math.random() * 0.3 + 0.1; // 0.1から0.4
+
+                container.appendChild(particle);
+
+                // アニメーション終了後に要素を削除
+                particle.addEventListener('animationend', () => {
+                    particle.remove();
+                });
+            }
+
+            // 定期的にパーティクルを生成（ここでは30個を一度に生成）
+            for (let i = 0; i < 30; i++) {
+                createParticle();
+            }
+            // さらに500msごとに新しいのを追加し続ける
+             setInterval(createParticle, 500);
+        });
+    </script>
+
 </body>
 </html>
-
 
